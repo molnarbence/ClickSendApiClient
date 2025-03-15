@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Refit;
 
 namespace ClickSendApi.Client;
 
@@ -13,7 +14,9 @@ public static class DependencyInjection
         
         services.AddTransient<AuthHeaderHandler>();
         
-        services.AddHttpClient<IClickSendApi>()
+        services
+            .AddRefitClient<IClickSendApi>()
+            .ConfigureHttpClient(httpClient => httpClient.BaseAddress = new Uri("https://rest.clicksend.com/v3"))
             .AddHttpMessageHandler<AuthHeaderHandler>();
 
         return services;
