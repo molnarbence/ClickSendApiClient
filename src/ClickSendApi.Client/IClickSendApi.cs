@@ -10,13 +10,13 @@ public interface IClickSendApi
     Task<GetContactsByContactListIdResponse> GetContactsByContactListIdAsync(int contactListId, [AliasAs("page")] int page, [AliasAs("limit")] int limit);
 
     [Post("/lists/{contactListId}/contacts")]
-    Task<CreateContactResponse> AddContactToContactList(int contactListId, [Body] CreateOrUpdateContact contact);
+    Task<IApiResponse<CreateContactResponse>> AddContactToContactList(int contactListId, [Body] CreateOrUpdateContact contact);
 
     [Put("/lists/{contactListId}/contacts/{contactId}")]
-    Task<UpdateContactResponse> UpdateContact(int contactListId, int contactId, [Body] CreateOrUpdateContact contact);
+    Task<IApiResponse<UpdateContactResponse>> UpdateContact(int contactListId, int contactId, [Body] CreateOrUpdateContact contact);
 
     [Delete("/lists/{contactListId}/contacts/{contactId}")]
-    Task DeleteContactFromContactList(int contactListId, int contactId);
+    Task<IApiResponse> DeleteContactFromContactList(int contactListId, int contactId);
 }
 
 
